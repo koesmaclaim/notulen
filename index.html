@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Memuat beberapa pilihan font dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
         /* --- Style Latar & Overlay --- */
         #background-container {
             position: fixed;
@@ -57,12 +57,12 @@
         <div id="main-content" class="w-full max-w-2xl mx-auto p-8 bg-white rounded-2xl shadow-lg text-center hidden">
             <div id="logo-container" class="flex justify-center mb-4"></div>
             <header class="mb-10">
-                <h1 id="main-title" class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight"></h1>
-                <p id="welcome-message" class="mt-3 text-lg text-gray-500"></p>
+                <h1 id="main-title" class="text-4xl md:text-5xl font-bold tracking-tight"></h1>
+                <p id="welcome-message" class="mt-3 text-lg"></p>
             </header>
             <main>
                 <div class="mb-10">
-                    <h2 id="schedule-title" class="text-2xl font-semibold text-gray-700 mb-4"></h2>
+                    <h2 id="schedule-title" class="text-2xl font-semibold mb-4"></h2>
                     <img id="schedule-image" src="" alt="Jadwal Kegiatan" class="w-full h-auto rounded-lg shadow-md object-cover">
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -97,20 +97,62 @@
             <h1 class="text-3xl font-bold text-gray-800 mb-6">Admin Panel</h1>
             <div class="bg-white p-8 rounded-2xl shadow-lg">
                 <form id="update-form">
-                    <div class="mb-6"><label for="title-admin" class="block text-sm font-bold text-gray-700 mb-2">Judul Utama</label><input type="text" id="title-admin" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></div>
-                    <div class="mb-6"><label for="quote-admin" class="block text-sm font-bold text-gray-700 mb-2">Pesan Selamat Datang</label><textarea id="quote-admin" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></textarea></div>
-                    <div class="mb-6"><label for="schedule-title-admin" class="block text-sm font-bold text-gray-700 mb-2">Judul Jadwal</label><input type="text" id="schedule-title-admin" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><label for="title-admin" class="block text-sm font-bold text-gray-700 mb-2">Judul Utama</label><input type="text" id="title-admin" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></div>
+                        <div><label for="quote-admin" class="block text-sm font-bold text-gray-700 mb-2">Pesan Selamat Datang</label><input type="text" id="quote-admin" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></div>
+                        <div><label for="schedule-title-admin" class="block text-sm font-bold text-gray-700 mb-2">Judul Jadwal</label><input type="text" id="schedule-title-admin" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></div>
+                    </div>
+                    
+                    <hr class="my-8">
+                    <h2 class="text-xl font-bold text-gray-700 mb-4">Pengaturan Tampilan</h2>
+                    
+                    <!-- Pengaturan Font -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <!-- Judul Utama -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Font Judul Utama</label>
+                            <div class="flex items-center gap-2">
+                                <select id="title_font_family" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></select>
+                                <input type="color" id="title_font_color" class="h-10 p-1 border border-gray-300 rounded-lg cursor-pointer">
+                            </div>
+                        </div>
+                        <!-- Pesan Selamat Datang -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Font Pesan Selamat Datang</label>
+                            <div class="flex items-center gap-2">
+                                <select id="quote_font_family" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></select>
+                                <input type="color" id="quote_font_color" class="h-10 p-1 border border-gray-300 rounded-lg cursor-pointer">
+                            </div>
+                        </div>
+                        <!-- Judul Jadwal -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Font Judul Jadwal</label>
+                            <div class="flex items-center gap-2">
+                                <select id="schedule_title_font_family" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></select>
+                                <input type="color" id="schedule_title_font_color" class="h-10 p-1 border border-gray-300 rounded-lg cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pengaturan Warna Kartu -->
                     <div class="mb-6">
-                        <label for="card-bg-admin" class="block text-sm font-bold text-gray-700 mb-2">Warna & Transparansi Latar Kartu</label>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Warna & Transparansi Latar Kartu</label>
                         <div class="flex items-center gap-4">
                             <input type="color" id="card-bg-admin" class="h-10 p-1 border border-gray-300 rounded-lg cursor-pointer">
                             <input type="range" id="card-alpha-admin" min="0" max="1" step="0.05" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                         </div>
                     </div>
-                    <div class="mb-6"><label class="block text-sm font-bold text-gray-700 mb-2">Gambar Logo</label><div class="flex items-center gap-4"><img id="logo_preview" src="" alt="Logo Preview" class="preview-img"><input type="file" id="logo_file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"></div><input type="hidden" id="logo_url"></div>
-                    <div class="mb-6"><label class="block text-sm font-bold text-gray-700 mb-2">Gambar Jadwal</label><div class="flex items-center gap-4"><img id="schedule_image_preview" src="" alt="Jadwal Preview" class="preview-img"><input type="file" id="schedule_image_file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"></div><input type="hidden" id="schedule_image_url"></div>
-                    <div class="mb-6"><label class="block text-sm font-bold text-gray-700 mb-2">Gambar Latar (Background)</label><div class="flex items-center gap-4"><img id="background_image_preview" src="" alt="Background Preview" class="preview-img"><input type="file" id="background_image_file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"></div><input type="hidden" id="background_image_url"></div>
-                    <div class="flex items-center"><button type="submit" id="save-button" class="bg-green-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-700 flex items-center gap-2"><span id="save-button-text">Simpan Perubahan</span><div id="save-spinner" class="spinner hidden"></div></button><p id="status-message" class="ml-4 text-sm font-medium"></p></div>
+
+                    <hr class="my-8">
+                    <h2 class="text-xl font-bold text-gray-700 mb-4">Pengaturan Gambar</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="mb-6"><label class="block text-sm font-bold text-gray-700 mb-2">Gambar Logo</label><div class="flex items-center gap-4"><img id="logo_preview" src="" alt="Logo Preview" class="preview-img"><input type="file" id="logo_file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"></div><input type="hidden" id="logo_url"></div>
+                        <div class="mb-6"><label class="block text-sm font-bold text-gray-700 mb-2">Gambar Jadwal</label><div class="flex items-center gap-4"><img id="schedule_image_preview" src="" alt="Jadwal Preview" class="preview-img"><input type="file" id="schedule_image_file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"></div><input type="hidden" id="schedule_image_url"></div>
+                        <div class="mb-6"><label class="block text-sm font-bold text-gray-700 mb-2">Gambar Latar</label><div class="flex items-center gap-4"><img id="background_image_preview" src="" alt="Background Preview" class="preview-img"><input type="file" id="background_image_file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"></div><input type="hidden" id="background_image_url"></div>
+                    </div>
+
+                    <div class="flex items-center mt-8"><button type="submit" id="save-button" class="bg-green-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-700 flex items-center gap-2"><span id="save-button-text">Simpan Perubahan</span><div id="save-spinner" class="spinner hidden"></div></button><p id="status-message" class="ml-4 text-sm font-medium"></p></div>
                 </form>
             </div>
         </div>
@@ -119,8 +161,8 @@
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzU0ojHkmefidFrIg6cBKypNF_1F1a7ZMCYmjG_5eEm2xiJq4zkrtFsGFv1orqzPugX/exec';
         const ADMIN_PASSWORD = 'admin123';
+        const FONT_OPTIONS = ['Inter', 'Roboto', 'Montserrat', 'Lato', 'Playfair Display'];
 
-        // Helper function to convert Hex to RGBA
         function hexToRgba(hex, alpha = 1) {
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             return result ? `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, ${alpha})` : '';
@@ -143,9 +185,22 @@
             fetch(SCRIPT_URL).then(res => res.json()).then(data => {
                 if (data.error) throw new Error(data.error);
                 document.title = data.title;
-                document.getElementById('main-title').textContent = data.title;
-                document.getElementById('welcome-message').textContent = data.quote;
-                document.getElementById('schedule-title').textContent = data.schedule_title;
+                
+                const mainTitle = document.getElementById('main-title');
+                mainTitle.textContent = data.title;
+                mainTitle.style.fontFamily = data.title_font_family;
+                mainTitle.style.color = data.title_font_color;
+
+                const welcomeMessage = document.getElementById('welcome-message');
+                welcomeMessage.textContent = data.quote;
+                welcomeMessage.style.fontFamily = data.quote_font_family;
+                welcomeMessage.style.color = data.quote_font_color;
+
+                const scheduleTitle = document.getElementById('schedule-title');
+                scheduleTitle.textContent = data.schedule_title;
+                scheduleTitle.style.fontFamily = data.schedule_title_font_family;
+                scheduleTitle.style.color = data.schedule_title_font_color;
+
                 document.getElementById('logo-container').innerHTML = `<img src="${data.logo_url}" alt="Logo ${data.title}" class="max-h-24 w-auto">`;
                 const scheduleImage = document.getElementById('schedule-image');
                 scheduleImage.src = data.schedule_image_url;
@@ -170,6 +225,19 @@
             const saveSpinner = document.getElementById('save-spinner');
             const statusMessage = document.getElementById('status-message');
 
+            // Populate font dropdowns
+            ['title_font_family', 'quote_font_family', 'schedule_title_font_family'].forEach(id => {
+                const select = document.getElementById(id);
+                if (select.options.length === 0) { // Prevent re-populating
+                    FONT_OPTIONS.forEach(font => {
+                        const option = document.createElement('option');
+                        option.value = font;
+                        option.textContent = font;
+                        select.appendChild(option);
+                    });
+                }
+            });
+
             const showStatus = (message, color = 'gray') => {
                 statusMessage.textContent = message;
                 statusMessage.className = `ml-4 text-sm font-medium text-${color}-600`;
@@ -192,6 +260,12 @@
                     document.getElementById('schedule-title-admin').value = data.schedule_title || '';
                     document.getElementById('card-bg-admin').value = data.card_background_color || '#ffffff';
                     document.getElementById('card-alpha-admin').value = data.card_background_alpha || '1.0';
+                    document.getElementById('title_font_family').value = data.title_font_family || 'Inter';
+                    document.getElementById('title_font_color').value = data.title_font_color || '#1f2937';
+                    document.getElementById('quote_font_family').value = data.quote_font_family || 'Inter';
+                    document.getElementById('quote_font_color').value = data.quote_font_color || '#6b7280';
+                    document.getElementById('schedule_title_font_family').value = data.schedule_title_font_family || 'Inter';
+                    document.getElementById('schedule_title_font_color').value = data.schedule_title_font_color || '#374151';
                     document.getElementById('logo_url').value = data.logo_url || '';
                     document.getElementById('logo_preview').src = data.logo_url || 'https://placehold.co/100x100/f0f0f0/a0a0a0?text=Preview';
                     document.getElementById('schedule_image_url').value = data.schedule_image_url || '';
@@ -223,6 +297,12 @@
                         schedule_title: document.getElementById('schedule-title-admin').value,
                         card_background_color: document.getElementById('card-bg-admin').value,
                         card_background_alpha: document.getElementById('card-alpha-admin').value,
+                        title_font_family: document.getElementById('title_font_family').value,
+                        title_font_color: document.getElementById('title_font_color').value,
+                        quote_font_family: document.getElementById('quote_font_family').value,
+                        quote_font_color: document.getElementById('quote_font_color').value,
+                        schedule_title_font_family: document.getElementById('schedule_title_font_family').value,
+                        schedule_title_font_color: document.getElementById('schedule_title_font_color').value,
                         logo_url: document.getElementById('logo_url').value, 
                         schedule_image_url: document.getElementById('schedule_image_url').value,
                         background_image_url: document.getElementById('background_image_url').value
