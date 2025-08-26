@@ -100,6 +100,7 @@
                     <div class="mb-6"><label for="title-admin" class="block text-sm font-bold text-gray-700 mb-2">Judul Utama</label><input type="text" id="title-admin" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></div>
                     <div class="mb-6"><label for="quote-admin" class="block text-sm font-bold text-gray-700 mb-2">Pesan Selamat Datang</label><textarea id="quote-admin" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></textarea></div>
                     <div class="mb-6"><label for="schedule-title-admin" class="block text-sm font-bold text-gray-700 mb-2">Judul Jadwal</label><input type="text" id="schedule-title-admin" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></div>
+                    <div class="mb-6"><label for="card-bg-admin" class="block text-sm font-bold text-gray-700 mb-2">Warna Latar Kartu</label><input type="color" id="card-bg-admin" class="w-full h-10 px-1 py-1 border border-gray-300 rounded-lg cursor-pointer"></div>
                     <div class="mb-6"><label class="block text-sm font-bold text-gray-700 mb-2">Gambar Logo</label><div class="flex items-center gap-4"><img id="logo_preview" src="" alt="Logo Preview" class="preview-img"><input type="file" id="logo_file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"></div><input type="hidden" id="logo_url"></div>
                     <div class="mb-6"><label class="block text-sm font-bold text-gray-700 mb-2">Gambar Jadwal</label><div class="flex items-center gap-4"><img id="schedule_image_preview" src="" alt="Jadwal Preview" class="preview-img"><input type="file" id="schedule_image_file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"></div><input type="hidden" id="schedule_image_url"></div>
                     <div class="mb-6"><label class="block text-sm font-bold text-gray-700 mb-2">Gambar Latar (Background)</label><div class="flex items-center gap-4"><img id="background_image_preview" src="" alt="Background Preview" class="preview-img"><input type="file" id="background_image_file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"></div><input type="hidden" id="background_image_url"></div>
@@ -138,6 +139,7 @@
                 scheduleImage.src = data.schedule_image_url;
                 scheduleImage.alt = data.schedule_title;
                 document.getElementById('background-container').style.backgroundImage = `url(${data.background_image_url})`;
+                document.getElementById('main-content').style.backgroundColor = data.card_background_color;
                 document.getElementById('loading-container').classList.add('hidden');
                 document.getElementById('main-content').classList.remove('hidden');
             }).catch(error => {
@@ -176,6 +178,7 @@
                     document.getElementById('title-admin').value = data.title || '';
                     document.getElementById('quote-admin').value = data.quote || '';
                     document.getElementById('schedule-title-admin').value = data.schedule_title || '';
+                    document.getElementById('card-bg-admin').value = data.card_background_color || '#ffffff';
                     document.getElementById('logo_url').value = data.logo_url || '';
                     document.getElementById('logo_preview').src = data.logo_url || 'https://placehold.co/100x100/f0f0f0/a0a0a0?text=Preview';
                     document.getElementById('schedule_image_url').value = data.schedule_image_url || '';
@@ -205,6 +208,7 @@
                         title: document.getElementById('title-admin').value, 
                         quote: document.getElementById('quote-admin').value, 
                         schedule_title: document.getElementById('schedule-title-admin').value,
+                        card_background_color: document.getElementById('card-bg-admin').value,
                         logo_url: document.getElementById('logo_url').value, 
                         schedule_image_url: document.getElementById('schedule_image_url').value,
                         background_image_url: document.getElementById('background_image_url').value
