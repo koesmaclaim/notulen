@@ -134,8 +134,10 @@
                 document.getElementById('main-title').textContent = data.title;
                 document.getElementById('quote-text').textContent = data.quote;
                 document.getElementById('schedule-title').textContent = data.schedule_title;
-                document.getElementById('logo-container').innerHTML = `<img src="${data.logo_url}" alt="Logo" class="h-20 w-auto">`;
-                document.getElementById('schedule-image').src = data.schedule_image_url;
+                document.getElementById('logo-container').innerHTML = `<img src="${data.logo_url}" alt="Logo ${data.title}" class="max-h-24 w-auto">`;
+                const scheduleImage = document.getElementById('schedule-image');
+                scheduleImage.src = data.schedule_image_url;
+                scheduleImage.alt = data.schedule_title; // Teks alt dinamis
                 document.getElementById('background-container').style.backgroundImage = `url(${data.background_image_url})`;
                 document.getElementById('loading-container').classList.add('hidden');
                 document.getElementById('main-content').classList.remove('hidden');
