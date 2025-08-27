@@ -87,10 +87,21 @@
                     <h2 id="schedule-title" class="text-2xl font-semibold mb-4"></h2>
                     <img id="schedule-image" src="" alt="Jadwal Kegiatan" class="w-full h-auto rounded-lg shadow-md object-cover">
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tombol-tombol navigasi -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Tombol ISI DAFTAR HADIR -->
                     <a href="#daftarhadir" id="button-1" class="block p-6 bg-indigo-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-left">
                         <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg><span>ISI DAFTAR HADIR</span></div>
                     </a>
+                    <!-- Tombol UPLOAD DATA -->
+                    <a href="#uploaddata" id="button-upload" class="block p-6 bg-yellow-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item fade-in-up">
+                         <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 mb-3"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg><span>UPLOAD DATA</span></div>
+                    </a>
+                    <!-- Tombol ARSIP DATA -->
+                    <a href="#arsipdata" id="button-archive" class="block p-6 bg-teal-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-right">
+                        <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 mb-3"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10.875 9v6.75m-3.75-6.75v6.75m9-6.75v6.75M18.75 1.5H5.25A2.25 2.25 0 003 3.75v3.75h18V3.75A2.25 2.25 0 0020.25 1.5z" /></svg><span>ARSIP DATA</span></div>
+                    </a>
+                    <!-- Tombol NOTULEN & KONTAK -->
                     <a href="#" id="button-2" class="block p-6 bg-green-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item fade-in-up">
                         <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><span>NOTULEN</span></div>
                     </a>
@@ -105,7 +116,6 @@
 
     <!-- =========== BAGIAN DAFTAR HADIR =========== -->
     <div id="attendance-section" class="hidden min-h-screen bg-slate-100 flex items-center justify-center py-10 p-4">
-        <!-- Kontainer utama formulir -->
         <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 md:p-8">
             <div class="flex justify-start mb-4">
                 <a href="#" class="flex items-center text-slate-500 hover:text-indigo-600 transition-colors">
@@ -116,21 +126,17 @@
             <h1 class="text-3xl font-bold text-center text-slate-800 mb-2">Daftar Hadir</h1>
             <p class="text-center text-slate-500 mb-8">Silakan isi data diri dan berikan tanda tangan Anda.</p>
             
-            <!-- Formulir -->
             <form id="attendance-form" class="space-y-6">
-                <!-- Input Nama -->
                 <div>
                     <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nama</label>
                     <input type="text" id="name" name="name" placeholder="Nama Lengkap" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
                 </div>
                 
-                <!-- Input Bagian/Unit -->
                 <div>
                     <label for="division" class="block text-sm font-medium text-slate-700 mb-1">Bagian/Unit/Ruangan</label>
                     <input type="text" id="division" name="division" placeholder="Contoh: Bagian Keuangan" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
                 </div>
                 
-                <!-- Area Tanda Tangan -->
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Tanda Tangan</label>
                     <div class="canvas-container relative">
@@ -139,11 +145,69 @@
                     </div>
                 </div>
                 
-                <!-- Tombol Kirim -->
                 <button type="submit" id="submit-button" class="w-full bg-indigo-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     Kirim Daftar Hadir
                 </button>
             </form>
+        </div>
+    </div>
+
+    <!-- =========== BAGIAN UPLOAD DATA =========== -->
+    <div id="upload-section" class="hidden min-h-screen bg-slate-100 flex items-center justify-center py-10 p-4">
+        <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <div class="flex justify-start mb-4">
+                <a href="#" class="flex items-center text-slate-500 hover:text-yellow-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                    Kembali
+                </a>
+            </div>
+            <h1 class="text-3xl font-bold text-center text-slate-800 mb-2">Unggah Data</h1>
+            <p class="text-center text-slate-500 mb-8">Silakan lengkapi formulir untuk mengunggah file.</p>
+            
+            <form id="upload-form" class="space-y-6">
+                <div>
+                    <label for="uploader-name" class="block text-sm font-medium text-slate-700 mb-1">Nama Pengunggah</label>
+                    <input type="text" id="uploader-name" name="uploader-name" placeholder="Nama Lengkap" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                </div>
+                
+                <div>
+                    <label for="uploader-division" class="block text-sm font-medium text-slate-700 mb-1">Bagian/Unit/Ruangan</label>
+                    <input type="text" id="uploader-division" name="uploader-division" placeholder="Contoh: Bagian Keuangan" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                </div>
+
+                <div>
+                    <label for="file-description" class="block text-sm font-medium text-slate-700 mb-1">Keterangan</label>
+                    <textarea id="file-description" name="file-description" rows="3" placeholder="Deskripsi singkat file" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required></textarea>
+                </div>
+
+                <div>
+                    <label for="upload-file" class="block text-sm font-medium text-slate-700 mb-1">Pilih File</label>
+                    <input type="file" id="upload-file" name="upload-file" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100" required>
+                </div>
+                
+                <button type="submit" id="upload-button" class="w-full bg-yellow-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-yellow-700 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                    Unggah File
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- =========== BAGIAN ARSIP DATA =========== -->
+    <div id="archive-section" class="hidden min-h-screen bg-slate-100 py-10 p-4">
+        <div class="w-full max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <div class="flex justify-start mb-4">
+                <a href="#" class="flex items-center text-slate-500 hover:text-teal-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                    Kembali
+                </a>
+            </div>
+            <h1 class="text-3xl font-bold text-center text-slate-800 mb-2">Arsip Data</h1>
+            <p class="text-center text-slate-500 mb-8">Daftar file yang telah diunggah.</p>
+            
+            <div id="archive-list-container">
+                <p id="archive-loading" class="text-center text-slate-500">Memuat data arsip...</p>
+                <!-- Daftar file akan dimuat di sini oleh JavaScript -->
+            </div>
         </div>
     </div>
     
@@ -247,6 +311,8 @@
             // Sembunyikan semua section
             document.getElementById('public-section').classList.add('hidden');
             document.getElementById('attendance-section').classList.add('hidden');
+            document.getElementById('upload-section').classList.add('hidden');
+            document.getElementById('archive-section').classList.add('hidden');
             document.getElementById('admin-section').classList.add('hidden');
 
             // Tampilkan section yang sesuai
@@ -258,6 +324,14 @@
                 document.getElementById('attendance-section').classList.remove('hidden');
                 document.title = 'Isi Daftar Hadir';
                 initializeAttendance();
+            } else if (hash === '#uploaddata') {
+                document.getElementById('upload-section').classList.remove('hidden');
+                document.title = 'Unggah Data';
+                initializeUpload();
+            } else if (hash === '#arsipdata') {
+                document.getElementById('archive-section').classList.remove('hidden');
+                document.title = 'Arsip Data';
+                initializeArchive();
             } else {
                 document.getElementById('public-section').classList.remove('hidden');
                 document.title = 'Beranda';
@@ -307,12 +381,12 @@
                 }, 300); // Tombol 1 muncul
 
                 setTimeout(() => {
-                    document.getElementById('button-2').classList.add('is-visible');
-                }, 450); // Tombol 2 muncul
+                    document.getElementById('button-upload').classList.add('is-visible');
+                }, 450); // Tombol upload muncul
 
                 setTimeout(() => {
-                    document.getElementById('button-3').classList.add('is-visible');
-                }, 600); // Tombol 3 muncul
+                    document.getElementById('button-archive').classList.add('is-visible');
+                }, 600); // Tombol arsip muncul
 
             }).catch(error => {
                 console.error('Error fetching data:', error);
@@ -348,11 +422,11 @@
                 statusMessage.className = `ml-4 text-sm font-medium text-${color}-600`;
             };
 
-            const uploadFile = (file) => new Promise((resolve, reject) => {
+            const uploadFile = (file, action) => new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = e => {
-                    const payload = { action: 'uploadFile', file: { base64Data: e.target.result.split(',')[1], mimeType: file.type, fileName: file.name } };
-                    fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json()).then(data => data.status === 'success' ? resolve(data.url) : reject(new Error(data.message))).catch(err => reject(err));
+                    const payload = { action: 'uploadFile', file: { base64Data: e.target.result.split(',')[1], mimeType: file.type, fileName: file.name }, uploadType: action };
+                    fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) }).then(res => res.json()).then(data => data.status === 'success' ? resolve(data) : reject(new Error(data.message))).catch(err => reject(err));
                 };
                 reader.readAsDataURL(file);
             });
@@ -387,13 +461,13 @@
                 saveButton.disabled = true; saveButtonText.textContent = 'Menyimpan...'; saveSpinner.classList.remove('hidden'); showStatus('Memproses...', 'gray');
                 try {
                     const logoFile = document.getElementById('logo_file').files[0];
-                    if (logoFile) { showStatus('Mengunggah logo...', 'gray'); document.getElementById('logo_url').value = await uploadFile(logoFile); }
+                    if (logoFile) { showStatus('Mengunggah logo...', 'gray'); document.getElementById('logo_url').value = (await uploadFile(logoFile, 'logo')).url; }
                     
                     const scheduleFile = document.getElementById('schedule_image_file').files[0];
-                    if (scheduleFile) { showStatus('Mengunggah jadwal...', 'gray'); document.getElementById('schedule_image_url').value = await uploadFile(scheduleFile); }
+                    if (scheduleFile) { showStatus('Mengunggah jadwal...', 'gray'); document.getElementById('schedule_image_url').value = (await uploadFile(scheduleFile, 'schedule_image')).url; }
                     
                     const bgFile = document.getElementById('background_image_file').files[0];
-                    if (bgFile) { showStatus('Mengunggah latar...', 'gray'); document.getElementById('background_image_url').value = await uploadFile(bgFile); }
+                    if (bgFile) { showStatus('Mengunggah latar...', 'gray'); document.getElementById('background_image_url').value = (await uploadFile(bgFile, 'background_image')).url; }
 
                     showStatus('Menyimpan data teks...', 'gray');
                     const textData = { action: 'updateData', data: { 
@@ -542,7 +616,8 @@
                             base64Data: base64Data,
                             mimeType: 'image/png',
                             fileName: `tanda_tangan_${name.replace(/\s/g, '_')}_${Date.now()}.png`
-                        }
+                        },
+                        uploadType: 'signature' // Tambahkan tipe upload
                     };
                     
                     const uploadResponse = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(uploadPayload) });
@@ -574,6 +649,8 @@
                     showMessageBox('Data berhasil dikirim!', true);
                     setTimeout(() => {
                         hideMessageBox();
+                        document.getElementById('attendance-form').reset();
+                        document.getElementById('clear-button').click();
                         window.location.hash = ''; // Kembali ke halaman utama
                     }, 3000);
                     
@@ -586,6 +663,139 @@
                     submitButton.textContent = 'Kirim Daftar Hadir';
                 }
             });
+        }
+        
+        // Fungsi inisialisasi untuk formulir upload
+        function initializeUpload() {
+            const form = document.getElementById('upload-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const uploadButton = document.getElementById('upload-button');
+                const fileInput = document.getElementById('upload-file');
+                const file = fileInput.files[0];
+
+                if (!file) {
+                    showMessageBox('Silakan pilih file untuk diunggah.', false);
+                    return;
+                }
+
+                uploadButton.disabled = true;
+                uploadButton.textContent = 'Mengunggah...';
+                showMessageBox('Sedang memproses unggahan...', undefined);
+
+                const uploaderName = document.getElementById('uploader-name').value;
+                const uploaderDivision = document.getElementById('uploader-division').value;
+                const fileDescription = document.getElementById('file-description').value;
+
+                try {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = async () => {
+                        const base64Data = reader.result.split(',')[1];
+                        const uploadPayload = {
+                            action: 'uploadFile',
+                            file: {
+                                base64Data: base64Data,
+                                mimeType: file.type,
+                                fileName: file.name
+                            },
+                            uploadType: 'data' // Tambahkan tipe upload
+                        };
+                        
+                        const uploadResponse = await fetch(SCRIPT_URL, {
+                            method: 'POST',
+                            body: JSON.stringify(uploadPayload)
+                        });
+                        const uploadResult = await uploadResponse.json();
+
+                        if (uploadResult.status !== 'success') {
+                            throw new Error(uploadResult.message || 'Gagal mengunggah file.');
+                        }
+
+                        const fileUrl = uploadResult.url;
+
+                        const dataPayload = {
+                            action: 'uploadData',
+                            data: {
+                                timestamp: new Date().toLocaleString('id-ID'),
+                                uploader_name: uploaderName,
+                                uploader_division: uploaderDivision,
+                                description: fileDescription,
+                                file_url: fileUrl,
+                                file_name: file.name
+                            }
+                        };
+                        
+                        const dataResponse = await fetch(SCRIPT_URL, {
+                            method: 'POST',
+                            body: JSON.stringify(dataPayload)
+                        });
+                        const dataResult = await dataResponse.json();
+
+                        if (dataResult.status !== 'success') {
+                            throw new Error(dataResult.message || 'Gagal menyimpan data ke GSheet.');
+                        }
+                        
+                        showMessageBox('Unggahan berhasil!', true);
+                        setTimeout(() => {
+                            hideMessageBox();
+                            form.reset();
+                            window.location.hash = '';
+                        }, 3000);
+                    };
+                } catch (err) {
+                    console.error('Error:', err);
+                    showMessageBox(`Terjadi kesalahan: ${err.message}`, false);
+                    setTimeout(() => hideMessageBox(), 5000);
+                } finally {
+                    uploadButton.disabled = false;
+                    uploadButton.textContent = 'Unggah File';
+                }
+            });
+        }
+
+        // Fungsi inisialisasi untuk halaman arsip
+        async function initializeArchive() {
+            const archiveListContainer = document.getElementById('archive-list-container');
+            const loadingMessage = document.getElementById('archive-loading');
+            loadingMessage.classList.remove('hidden');
+            archiveListContainer.innerHTML = '';
+            
+            try {
+                const response = await fetch(SCRIPT_URL + '?action=getUploadedData');
+                const files = await response.json();
+
+                if (!files || files.length === 0) {
+                    archiveListContainer.innerHTML = '<p class="text-center text-slate-500">Tidak ada file yang diunggah.</p>';
+                } else {
+                    const ul = document.createElement('ul');
+                    ul.className = 'divide-y divide-gray-200';
+                    files.forEach(file => {
+                        const li = document.createElement('li');
+                        li.className = 'py-4 flex flex-col sm:flex-row sm:items-center';
+                        li.innerHTML = `
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg font-semibold text-slate-800">${file.file_name}</h3>
+                                <p class="text-sm text-slate-500">Oleh: ${file.uploader_name} (${file.uploader_division})</p>
+                                <p class="text-sm text-slate-400 mt-1">${file.description}</p>
+                            </div>
+                            <div class="mt-2 sm:mt-0 sm:ml-4">
+                                <a href="${file.file_url}" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-teal-600 hover:bg-teal-700 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                    Lihat File
+                                </a>
+                            </div>
+                        `;
+                        ul.appendChild(li);
+                    });
+                    archiveListContainer.appendChild(ul);
+                }
+            } catch (error) {
+                console.error('Error fetching archive data:', error);
+                archiveListContainer.innerHTML = `<p class="text-red-500 text-center">Gagal memuat arsip: ${error.message}.</p>`;
+            } finally {
+                loadingMessage.classList.add('hidden');
+            }
         }
         
         function showMessageBox(message, isSuccess) {
