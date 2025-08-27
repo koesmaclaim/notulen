@@ -88,24 +88,24 @@
                     <img id="schedule-image" src="" alt="Jadwal Kegiatan" class="w-full h-auto rounded-lg shadow-md object-cover">
                 </div>
                 <!-- Tombol-tombol navigasi -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                     <!-- Tombol ISI DAFTAR HADIR -->
-                    <a href="#daftarhadir" id="button-1" class="block p-6 bg-indigo-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-left">
+                    <a href="#daftarhadir" id="button-1" class="block p-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-left">
                         <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg><span>ISI DAFTAR HADIR</span></div>
                     </a>
                     <!-- Tombol UPLOAD DATA -->
-                    <a href="#uploaddata" id="button-upload" class="block p-6 bg-yellow-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item fade-in-up">
+                    <a href="#uploaddata" id="button-upload" class="block p-4 bg-yellow-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item fade-in-up">
                          <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 mb-3"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg><span>UPLOAD DATA</span></div>
                     </a>
                     <!-- Tombol ARSIP DATA -->
-                    <a href="#arsipdata" id="button-archive" class="block p-6 bg-teal-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-right">
+                    <a href="#arsipdata" id="button-archive" class="block p-4 bg-teal-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-right">
                         <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 mb-3"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10.875 9v6.75m-3.75-6.75v6.75m9-6.75v6.75M18.75 1.5H5.25A2.25 2.25 0 003 3.75v3.75h18V3.75A2.25 2.25 0 0020.25 1.5z" /></svg><span>ARSIP DATA</span></div>
                     </a>
                     <!-- Tombol NOTULEN & KONTAK -->
-                    <a href="#" id="button-2" class="block p-6 bg-green-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item fade-in-up">
+                    <a href="#" id="button-2" class="block p-4 bg-green-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item fade-in-up">
                         <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><span>NOTULEN</span></div>
                     </a>
-                    <a href="#" id="button-3" class="block p-6 bg-blue-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-right">
+                    <a href="#" id="button-3" class="block p-4 bg-blue-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-right">
                         <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg><span>KONTAK PERSON</span></div>
                     </a>
                 </div>
@@ -424,6 +424,15 @@
                 setTimeout(() => {
                     document.getElementById('button-archive').classList.add('is-visible');
                 }, 600); // Tombol arsip muncul
+
+                setTimeout(() => {
+                    document.getElementById('button-2').classList.add('is-visible');
+                }, 750); // Tombol notulen muncul
+                
+                setTimeout(() => {
+                    document.getElementById('button-3').classList.add('is-visible');
+                }, 900); // Tombol kontak muncul
+
 
             }).catch(error => {
                 console.error('Error fetching data:', error);
