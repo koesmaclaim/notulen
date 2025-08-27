@@ -234,6 +234,7 @@
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzU0ojHkmefidFrIg6cBKypNF_1F1a7ZMCYmjG_5eEm2xiJq4zkrtFsGFv1orqzPugX/exec';
         const ADMIN_PASSWORD = 'admin123';
         const FONT_OPTIONS = ['Inter', 'Roboto', 'Montserrat', 'Lato', 'Playfair Display'];
+        const initialSignatureData = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='; // 1x1 white pixel
 
         function hexToRgba(hex, alpha = 1) {
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -458,7 +459,17 @@
                 context.lineJoin = 'round';
                 context.lineCap = 'round';
             }
+
             resizeCanvas();
+
+            // Atur ulang kanvas ke kondisi awal
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = 'white';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            const initialData = canvas.toDataURL();
+
+            // Tambahkan event listener untuk resize agar kanvas tetap responsif
+            window.addEventListener('resize', resizeCanvas);
 
             function getMousePos(event) {
                 const rect = canvas.getBoundingClientRect();
@@ -513,9 +524,7 @@
                 const division = document.getElementById('division').value;
                 
                 const signatureData = canvas.toDataURL('image/png');
-                const isCanvasEmpty = signatureData === canvas.toDataURL('image/png', 0);
-                
-                if (isCanvasEmpty) {
+                if (signatureData === initialData) {
                     showMessageBox('Tanda tangan tidak boleh kosong.', false);
                     return;
                 }
