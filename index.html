@@ -32,32 +32,35 @@
             background-color: rgba(0, 0, 0, 0.5); /* Overlay gelap semi-transparan */
             z-index: -1;
         }
-        /* --- Style Umum --- */
+        /* --- Style Umum & Animasi --- */
         .btn-hover-effect { transition: all 0.3s ease; }
         .btn-hover-effect:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); }
         .loader { border: 4px solid #f3f3f3; border-radius: 50%; border-top: 4px solid #ffffff; width: 40px; height: 40px; animation: spin 2s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .animate-item { opacity: 0; transition: all 0.8s ease-out; }
+        .fade-in-up { transform: translateY(20px); }
+        .slide-in-left { transform: translateX(-20px); }
+        .slide-in-right { transform: translateX(20px); }
+        .animate-item.is-visible { opacity: 1; transform: translate(0, 0); }
         /* --- Style Admin --- */
         .preview-img { max-height: 100px; border-radius: 0.5rem; border: 1px solid #e5e7eb; object-contain; }
         .spinner { border: 2px solid #f3f3f3; border-top: 2px solid #3498db; border-radius: 50%; width: 16px; height: 16px; animation: spin 1s linear infinite; }
 
-        /* --- Style Animasi --- */
-        .animate-item {
-            opacity: 0;
-            transition: all 0.8s ease-out;
+        /* --- Style Form Daftar Hadir --- */
+        .canvas-container {
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            touch-action: none; /* Mencegah scrolling pada canvas di mobile */
+            cursor: crosshair;
         }
-        .fade-in-up {
-            transform: translateY(20px);
-        }
-        .slide-in-left {
-            transform: translateX(-20px);
-        }
-        .slide-in-right {
-            transform: translateX(20px);
-        }
-        .animate-item.is-visible {
-            opacity: 1;
-            transform: translate(0, 0);
+        .message-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
         }
     </style>
 </head>
@@ -85,7 +88,7 @@
                     <img id="schedule-image" src="" alt="Jadwal Kegiatan" class="w-full h-auto rounded-lg shadow-md object-cover">
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <a href="#" id="button-1" class="block p-6 bg-indigo-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-left">
+                    <a href="#daftarhadir" id="button-1" class="block p-6 bg-indigo-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item slide-in-left">
                         <div class="flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg><span>ISI DAFTAR HADIR</span></div>
                     </a>
                     <a href="#" id="button-2" class="block p-6 bg-green-600 text-white font-semibold rounded-xl shadow-md btn-hover-effect animate-item fade-in-up">
@@ -98,6 +101,56 @@
             </main>
             <footer class="mt-12 text-center"><p class="text-sm text-gray-400">&copy; 2025 Perusahaan Anda. Hak Cipta Dilindungi.</p></footer>
         </div>
+    </div>
+
+    <!-- =========== BAGIAN DAFTAR HADIR =========== -->
+    <div id="attendance-section" class="hidden min-h-screen bg-slate-100 flex items-center justify-center py-10 p-4">
+        <!-- Kontainer utama formulir -->
+        <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <div class="flex justify-start mb-4">
+                <a href="#" class="flex items-center text-slate-500 hover:text-indigo-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                    Kembali
+                </a>
+            </div>
+            <h1 class="text-3xl font-bold text-center text-slate-800 mb-2">Daftar Hadir</h1>
+            <p class="text-center text-slate-500 mb-8">Silakan isi data diri dan berikan tanda tangan Anda.</p>
+            
+            <!-- Formulir -->
+            <form id="attendance-form" class="space-y-6">
+                <!-- Input Nama -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nama</label>
+                    <input type="text" id="name" name="name" placeholder="Nama Lengkap" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                </div>
+                
+                <!-- Input Bagian/Unit -->
+                <div>
+                    <label for="division" class="block text-sm font-medium text-slate-700 mb-1">Bagian/Unit/Ruangan</label>
+                    <input type="text" id="division" name="division" placeholder="Contoh: Bagian Keuangan" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                </div>
+                
+                <!-- Area Tanda Tangan -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Tanda Tangan</label>
+                    <div class="canvas-container relative">
+                        <canvas id="signature-pad" class="w-full h-48"></canvas>
+                        <button type="button" id="clear-button" class="absolute bottom-2 right-2 px-3 py-1 bg-red-500 text-white rounded-full text-xs font-semibold hover:bg-red-600 transition-colors">Hapus</button>
+                    </div>
+                </div>
+                
+                <!-- Tombol Kirim -->
+                <button type="submit" id="submit-button" class="w-full bg-indigo-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Kirim Daftar Hadir
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Kotak pesan/loading -->
+    <div id="message-box" class="message-box bg-white rounded-lg shadow-xl p-6 text-center">
+        <div id="loading-spinner" class="loader mx-auto mb-4 hidden"></div>
+        <p id="message-text" class="text-slate-700"></p>
     </div>
 
     <!-- =========== BAGIAN ADMIN =========== -->
@@ -187,15 +240,26 @@
             return result ? `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, ${alpha})` : '';
         }
 
+        // Fungsi untuk mengelola routing
         function handleRouting() {
-            if (window.location.hash === '#admin') {
-                document.getElementById('public-section').classList.add('hidden');
+            const hash = window.location.hash;
+            // Sembunyikan semua section
+            document.getElementById('public-section').classList.add('hidden');
+            document.getElementById('attendance-section').classList.add('hidden');
+            document.getElementById('admin-section').classList.add('hidden');
+
+            // Tampilkan section yang sesuai
+            if (hash === '#admin') {
                 document.getElementById('admin-section').classList.remove('hidden');
                 document.title = 'Admin Panel';
                 initializeAdmin();
+            } else if (hash === '#daftarhadir') {
+                document.getElementById('attendance-section').classList.remove('hidden');
+                document.title = 'Isi Daftar Hadir';
+                initializeAttendance();
             } else {
-                document.getElementById('admin-section').classList.add('hidden');
                 document.getElementById('public-section').classList.remove('hidden');
+                document.title = 'Beranda';
                 initializePublic();
             }
         }
@@ -375,6 +439,167 @@
             setupPreview('logo_file', 'logo_preview');
             setupPreview('schedule_image_file', 'schedule_image_preview');
             setupPreview('background_image_file', 'background_image_preview');
+        }
+
+        // Fungsi inisialisasi untuk formulir daftar hadir
+        function initializeAttendance() {
+            const canvas = document.getElementById('signature-pad');
+            const context = canvas.getContext('2d');
+            let isDrawing = false;
+            
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+                context.fillStyle = 'white';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                context.lineWidth = 2;
+                context.strokeStyle = '#000000';
+                context.lineJoin = 'round';
+                context.lineCap = 'round';
+            }
+            resizeCanvas();
+
+            function getMousePos(event) {
+                const rect = canvas.getBoundingClientRect();
+                return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+            }
+            function getTouchPos(event) {
+                const rect = canvas.getBoundingClientRect();
+                return { x: event.touches[0].clientX - rect.left, y: event.touches[0].clientY - rect.top };
+            }
+            function startDrawing(pos) {
+                isDrawing = true;
+                context.beginPath();
+                context.moveTo(pos.x, pos.y);
+            }
+            function draw(pos) {
+                if (!isDrawing) return;
+                context.lineTo(pos.x, pos.y);
+                context.stroke();
+            }
+            function stopDrawing() {
+                isDrawing = false;
+            }
+
+            canvas.addEventListener('mousedown', (e) => startDrawing(getMousePos(e)));
+            canvas.addEventListener('mousemove', (e) => draw(getMousePos(e)));
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseleave', stopDrawing);
+
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                startDrawing(getTouchPos(e));
+            });
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                draw(getTouchPos(e));
+            });
+            canvas.addEventListener('touchend', stopDrawing);
+
+            document.getElementById('clear-button').addEventListener('click', (e) => {
+                e.preventDefault();
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.fillStyle = 'white';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+            });
+            
+            // Logika pengiriman formulir
+            document.getElementById('attendance-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const submitButton = document.getElementById('submit-button');
+                const name = document.getElementById('name').value;
+                const division = document.getElementById('division').value;
+                
+                const signatureData = canvas.toDataURL('image/png');
+                const isCanvasEmpty = signatureData === canvas.toDataURL('image/png', 0);
+                
+                if (isCanvasEmpty) {
+                    showMessageBox('Tanda tangan tidak boleh kosong.', false);
+                    return;
+                }
+
+                submitButton.disabled = true;
+                submitButton.textContent = 'Mengirim...';
+                showMessageBox('Sedang mengirim data...', undefined);
+                
+                try {
+                    const base64Data = signatureData.split(',')[1];
+                    
+                    const uploadPayload = {
+                        action: 'uploadFile',
+                        file: {
+                            base64Data: base64Data,
+                            mimeType: 'image/png',
+                            fileName: `tanda_tangan_${name.replace(/\s/g, '_')}_${Date.now()}.png`
+                        }
+                    };
+                    
+                    const uploadResponse = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(uploadPayload) });
+                    const uploadResult = await uploadResponse.json();
+                    
+                    if (uploadResult.status !== 'success') {
+                        throw new Error(uploadResult.message || 'Gagal mengunggah tanda tangan.');
+                    }
+                    
+                    const signatureUrl = uploadResult.url;
+                    
+                    const attendancePayload = {
+                        action: 'updateAttendance',
+                        data: {
+                            timestamp: new Date().toLocaleString('id-ID'),
+                            name: name,
+                            division: division,
+                            signature_url: signatureUrl
+                        }
+                    };
+                    
+                    const attendanceResponse = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(attendancePayload) });
+                    const attendanceResult = await attendanceResponse.json();
+                    
+                    if (attendanceResult.status !== 'success') {
+                        throw new Error(attendanceResult.message || 'Gagal menyimpan data ke GSheet.');
+                    }
+                    
+                    showMessageBox('Data berhasil dikirim!', true);
+                    setTimeout(() => {
+                        hideMessageBox();
+                        document.getElementById('attendance-form').reset();
+                        document.getElementById('clear-button').click();
+                    }, 3000);
+                    
+                } catch (err) {
+                    console.error('Error:', err);
+                    showMessageBox(`Terjadi kesalahan: ${err.message}`, false);
+                    setTimeout(() => hideMessageBox(), 5000);
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Kirim Daftar Hadir';
+                }
+            });
+        }
+        
+        function showMessageBox(message, isSuccess) {
+            const messageBox = document.getElementById('message-box');
+            const messageText = document.getElementById('message-text');
+            const spinner = document.getElementById('loading-spinner');
+            messageText.textContent = message;
+            spinner.classList.add('hidden');
+            if (isSuccess === undefined) {
+                spinner.classList.remove('hidden');
+                messageBox.className = 'message-box bg-white rounded-lg shadow-xl p-6 text-center';
+            } else if (isSuccess) {
+                messageBox.className = 'message-box bg-green-100 text-green-700 rounded-lg shadow-xl p-6 text-center';
+            } else {
+                messageBox.className = 'message-box bg-red-100 text-red-700 rounded-lg shadow-xl p-6 text-center';
+            }
+            messageBox.style.display = 'block';
+        }
+        
+        function hideMessageBox() {
+            const messageBox = document.getElementById('message-box');
+            messageBox.style.display = 'none';
         }
 
         document.addEventListener('DOMContentLoaded', handleRouting);
