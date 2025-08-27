@@ -574,8 +574,7 @@
                     showMessageBox('Data berhasil dikirim!', true);
                     setTimeout(() => {
                         hideMessageBox();
-                        document.getElementById('attendance-form').reset();
-                        document.getElementById('clear-button').click();
+                        window.location.hash = ''; // Kembali ke halaman utama
                     }, 3000);
                     
                 } catch (err) {
