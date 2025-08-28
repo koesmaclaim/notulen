@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon dengan logo dari Google Sheets -->
+    <link rel="icon" type="image/x-icon" id="favicon">
     <title>Memuat...</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -181,7 +183,7 @@
                 </div>
 
                 <div>
-                    <label for="upload-file" class="block text-sm font-medium text-slate-700 mb-1">Pilih File</label>
+                    <label for="upload-file" class="block w-full text-sm font-medium text-slate-700 mb-1">Pilih File</label>
                     <input type="file" id="upload-file" name="upload-file" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100" required>
                 </div>
                 
@@ -393,7 +395,12 @@
                 scheduleTitle.style.fontFamily = data.schedule_title_font_family;
                 scheduleTitle.style.color = data.schedule_title_font_color;
 
-                document.getElementById('logo-container').innerHTML = `<img src="${data.logo_url}" alt="Logo ${data.title}" class="max-h-24 w-auto">`;
+                const logoContainer = document.getElementById('logo-container');
+                logoContainer.innerHTML = `<img src="${data.logo_url}" alt="Logo ${data.title}" class="max-h-24 w-auto">`;
+
+                // Set favicon dynamically
+                document.getElementById('favicon').href = data.logo_url;
+
                 const scheduleImage = document.getElementById('schedule-image');
                 scheduleImage.src = data.schedule_image_url;
                 scheduleImage.alt = data.schedule_title;
