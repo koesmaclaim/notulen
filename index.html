@@ -428,8 +428,26 @@
             }
         }
 
-        function initializePublic() {
-            fetch(SCRIPT_URL).then(res => res.json()).then(data => {
+        async function fetchImageAsBase64(fileId, mimeType) {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getImage&id=${fileId}`);
+                const data = await response.json();
+                if (data.status === 'success') {
+                    return `data:${mimeType};base64,${data.base64Data}`;
+                } else {
+                    console.error('Error fetching image:', data.message);
+                    return null;
+                }
+            } catch (error) {
+                console.error('Network error fetching image:', error);
+                return null;
+            }
+        }
+
+        async function initializePublic() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
                 if (data.error) throw new Error(data.error);
                 document.title = data.title;
                 
@@ -448,16 +466,34 @@
                 scheduleTitle.style.fontFamily = data.schedule_title_font_family;
                 scheduleTitle.style.color = data.schedule_title_font_color;
 
-                const logoContainer = document.getElementById('logo-container');
-                logoContainer.innerHTML = `<img src="${data.logo_url}" alt="Logo ${data.title}" class="max-h-24 w-auto">`;
+                // Load images using Base64 method
+                const logoId = data.logo_url.split('id=')[1];
+                const scheduleId = data.schedule_image_url.split('id=')[1];
+                const backgroundId = data.background_image_url.split('id=')[1];
 
-                // Set favicon dynamically
-                document.getElementById('favicon').href = data.logo_url;
+                if (logoId) {
+                    const logoBase64 = await fetchImageAsBase64(logoId, 'image/png');
+                    if (logoBase64) {
+                        document.getElementById('logo-container').innerHTML = `<img src="${logoBase64}" alt="Logo ${data.title}" class="max-h-24 w-auto">`;
+                        document.getElementById('favicon').href = logoBase64;
+                    }
+                }
 
-                const scheduleImage = document.getElementById('schedule-image');
-                scheduleImage.src = data.schedule_image_url;
-                scheduleImage.alt = data.schedule_title;
-                document.getElementById('background-container').style.backgroundImage = `url(${data.background_image_url})`;
+                if (scheduleId) {
+                    const scheduleBase64 = await fetchImageAsBase64(scheduleId, 'image/png');
+                    if (scheduleBase64) {
+                        document.getElementById('schedule-image').src = scheduleBase64;
+                        document.getElementById('schedule-image').alt = data.schedule_title;
+                    }
+                }
+
+                if (backgroundId) {
+                    const backgroundBase64 = await fetchImageAsBase64(backgroundId, 'image/png');
+                    if (backgroundBase64) {
+                        document.getElementById('background-container').style.backgroundImage = `url("${backgroundBase64}")`;
+                    }
+                }
+
                 document.getElementById('main-content').style.backgroundColor = hexToRgba(data.card_background_color, data.card_background_alpha);
                 
                 // Tambahkan URL notulen ke tombol notulen
@@ -498,10 +534,10 @@
                 }, 900); // Tombol kontak muncul
 
 
-            }).catch(error => {
+            } catch (error) {
                 console.error('Error fetching data:', error);
                 document.getElementById('loading-container').innerHTML = `<p class="text-red-500">Gagal memuat data: ${error.message}.</p>`;
-            });
+            }
         }
 
         function initializeAdmin() {
