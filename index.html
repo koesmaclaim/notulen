@@ -9,8 +9,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Memuat beberapa pilihan font dari Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Memuat beberapa pilihan font dari Google Fonts, termasuk Dancing Script sebagai alternatif Monotype Corsiva -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@400;500;700&family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- Style Latar & Overlay --- */
         #background-container {
@@ -384,7 +384,7 @@
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzU0ojHkmefidFrIg6cBKypNF_1F1a7ZMCYmjG_5eEm2xiJq4zkrtFsGFv1orqzPugX/exec';
         const ADMIN_PASSWORD = 'admin123';
-        const FONT_OPTIONS = ['Inter', 'Roboto', 'Montserrat', 'Lato', 'Playfair Display'];
+        const FONT_OPTIONS = ['Inter', 'Roboto', 'Montserrat', 'Lato', 'Playfair Display', 'Dancing Script'];
         const ITEMS_PER_PAGE = 15;
         let allArchiveData = [];
         let currentPage = 1;
@@ -548,7 +548,7 @@
                     document.getElementById('quote-admin').value = data.quote || '';
                     document.getElementById('schedule-title-admin').value = data.schedule_title || '';
                     document.getElementById('notulen-url-admin').value = data.notulen_url || '';
-                    document.getElementById('kontak-url-admin').value = data.kontak_url || ''; // Ambil data kontak_url
+                    document.getElementById('kontak-url-admin').value = data.kontak_url || '';
                     document.getElementById('card-bg-admin').value = data.card_background_color || '#ffffff';
                     document.getElementById('card-alpha-admin').value = data.card_background_alpha || '1.0';
                     document.getElementById('title_font_family').value = data.title_font_family || 'Inter';
@@ -587,7 +587,7 @@
                         quote: document.getElementById('quote-admin').value, 
                         schedule_title: document.getElementById('schedule-title-admin').value,
                         notulen_url: document.getElementById('notulen-url-admin').value,
-                        kontak_url: document.getElementById('kontak-url-admin').value, // Kirim data kontak_url
+                        kontak_url: document.getElementById('kontak-url-admin').value,
                         card_background_color: document.getElementById('card-bg-admin').value,
                         card_background_alpha: document.getElementById('card-alpha-admin').value,
                         title_font_family: document.getElementById('title_font_family').value,
