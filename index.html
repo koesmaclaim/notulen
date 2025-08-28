@@ -64,6 +64,48 @@
             transform: translate(-50%, -50%);
             z-index: 1000;
         }
+
+        /* --- Style Tambahan untuk Tabel Arsip --- */
+        .archive-table-header {
+            display: none; /* Defaultnya disembunyikan untuk mobile */
+        }
+
+        /* Tampilan Grid untuk Tablet & Desktop */
+        @media (min-width: 768px) {
+            .archive-table-header, .archive-table-row {
+                display: grid;
+                grid-template-columns: 50px 1.5fr 2fr 1.5fr 3fr; /* Kolom 'Waktu Upload' ditambahkan */
+                gap: 1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                align-items: center;
+            }
+            .archive-table-header {
+                font-weight: 600;
+                color: #4b5563; /* gray-600 */
+                border-bottom: 2px solid #e5e7eb; /* gray-200 */
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+                display: grid; /* Tampilkan header */
+            }
+            .archive-table-row {
+                border-bottom: 1px solid #e5e7eb;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+            .archive-table-row:last-child {
+                border-bottom: none;
+            }
+            /* Menyesuaikan grid untuk versi tanpa kolom "Aksi" */
+            .archive-table-row:hover {
+                background-color: #f9fafb;
+            }
+            .archive-table-row a {
+                color: #1d4ed8; /* blue-700 */
+                text-decoration: underline;
+                font-weight: 500;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-800">
@@ -831,37 +873,41 @@
 
             let filteredData = [];
             
-            // Render data ke halaman
+            // Render data ke halaman dalam format tabel
             const renderData = () => {
-                archiveListContainer.innerHTML = '';
+                const headerHtml = `
+                    <div class="archive-table-header hidden md:grid">
+                        <div>No.</div>
+                        <div>Waktu Upload</div>
+                        <div>Nama File</div>
+                        <div>Bidang/Bagian</div>
+                        <div>Keterangan</div>
+                    </div>
+                `;
+                archiveListContainer.innerHTML = headerHtml;
+
                 const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
                 const endIndex = startIndex + ITEMS_PER_PAGE;
                 const paginatedData = filteredData.slice(startIndex, endIndex);
 
                 if (paginatedData.length === 0) {
-                     archiveListContainer.innerHTML = '<p class="text-center text-slate-500">Tidak ada file yang ditemukan.</p>';
+                     archiveListContainer.innerHTML += '<p class="text-center text-slate-500 mt-4">Tidak ada file yang ditemukan.</p>';
                 } else {
-                    const ul = document.createElement('ul');
-                    ul.className = 'divide-y divide-gray-200';
-                    paginatedData.forEach(file => {
-                        const li = document.createElement('li');
-                        li.className = 'py-4 flex flex-col sm:flex-row sm:items-center';
-                        li.innerHTML = `
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-lg font-semibold text-slate-800">${file.file_name}</h3>
-                                <p class="text-sm text-slate-500">Oleh: ${file.uploader_name} (${file.uploader_division})</p>
-                                <p class="text-sm text-slate-400 mt-1">${file.description}</p>
+                    paginatedData.forEach((file, index) => {
+                        const fileRow = document.createElement('div');
+                        fileRow.className = 'archive-table-row';
+                        fileRow.innerHTML = `
+                            <div class="text-slate-700 font-medium md:text-center">${startIndex + index + 1}</div>
+                            <div class="text-sm text-slate-500">${file.timestamp}</div>
+                            <div>
+                                <a href="${file.file_url}" target="_blank" class="text-slate-800 font-semibold md:font-normal hover:text-teal-600 transition-colors">${file.file_name}</a>
+                                <p class="text-sm text-slate-500 md:hidden">Oleh: ${file.uploader_name} (${file.uploader_division})</p>
                             </div>
-                            <div class="mt-2 sm:mt-0 sm:ml-4">
-                                <a href="${file.file_url}" target="_blank" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-teal-600 hover:bg-teal-700 transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                                    Lihat File
-                                </a>
-                            </div>
+                            <div class="hidden md:block text-slate-500">${file.uploader_division}</div>
+                            <div class="hidden md:block text-slate-500">${file.description}</div>
                         `;
-                        ul.appendChild(li);
+                        archiveListContainer.appendChild(fileRow);
                     });
-                    archiveListContainer.appendChild(ul);
                 }
 
                 // Perbarui kontrol paginasi
@@ -891,7 +937,7 @@
                     });
 
                     if (allArchiveData.length === 0) {
-                        archiveListContainer.innerHTML = '<p class="text-center text-slate-500">Tidak ada file yang diunggah.</p>';
+                        archiveListContainer.innerHTML = '<p class="text-center text-slate-500 mt-4">Tidak ada file yang diunggah.</p>';
                     } else {
                         updateFilterSortAndRender();
                     }
