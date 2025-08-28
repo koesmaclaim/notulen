@@ -226,7 +226,7 @@
 
                 <div>
                     <label for="upload-file" class="block w-full text-sm font-medium text-slate-700 mb-1">Pilih File</label>
-                    <input type="file" id="upload-file" name="upload-file" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100" required>
+                    <input type="file" id="upload-file" name="upload-file" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100" required>
                 </div>
                 
                 <button type="submit" id="upload-button" class="w-full bg-yellow-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-yellow-700 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
@@ -382,8 +382,6 @@
     </div>
 
     <script>
-        // PERHATIAN: Ganti URL di bawah ini dengan URL "Aplikasi Web" Google Apps Script Anda.
-        // Anda bisa mendapatkan URL ini setelah menyebarkan skrip (Deploy > New deployment).
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzU0ojHkmefidFrIg6cBKypNF_1F1a7ZMCYmjG_5eEm2xiJq4zkrtFsGFv1orqzPugX/exec';
         const ADMIN_PASSWORD = 'admin123';
         const FONT_OPTIONS = ['Inter', 'Roboto', 'Montserrat', 'Lato', 'Playfair Display', 'Dancing Script'];
@@ -431,13 +429,6 @@
         }
 
         function initializePublic() {
-            // Check if SCRIPT_URL is set before fetching
-            if (SCRIPT_URL === 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
-                console.error("Error: Google Apps Script URL is not set. Please deploy your script and replace the placeholder.");
-                document.getElementById('loading-container').innerHTML = `<p class="text-red-500">Error: SCRIPT_URL belum diatur. Silakan sebarkan skrip Anda dan ganti placeholder-nya.</p>`;
-                return;
-            }
-
             fetch(SCRIPT_URL).then(res => res.json()).then(data => {
                 if (data.error) throw new Error(data.error);
                 document.title = data.title;
@@ -509,7 +500,7 @@
 
             }).catch(error => {
                 console.error('Error fetching data:', error);
-                document.getElementById('loading-container').innerHTML = `<p class="text-red-500">Gagal memuat data: ${error.message}. Pastikan URL Aplikasi Web Anda benar.</p>`;
+                document.getElementById('loading-container').innerHTML = `<p class="text-red-500">Gagal memuat data: ${error.message}.</p>`;
             });
         }
 
