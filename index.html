@@ -428,6 +428,22 @@
             }
         }
 
+        async function fetchImageAsBase64(fileId, mimeType) {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getImage&id=${fileId}`);
+                const data = await response.json();
+                if (data.status === 'success') {
+                    return `data:${mimeType};base64,${data.base64Data}`;
+                } else {
+                    console.error('Error fetching image:', data.message);
+                    return null;
+                }
+            } catch (error) {
+                console.error('Network error fetching image:', error);
+                return null;
+            }
+        }
+
         async function initializePublic() {
             try {
                 const response = await fetch(SCRIPT_URL);
@@ -450,38 +466,73 @@
                 scheduleTitle.style.fontFamily = data.schedule_title_font_family;
                 scheduleTitle.style.color = data.schedule_title_font_color;
 
-                document.getElementById('logo-container').innerHTML = `<img src="${data.logo_url}" alt="Logo ${data.title}" class="max-h-24 w-auto">`;
-                document.getElementById('favicon').href = data.logo_url;
-                document.getElementById('schedule-image').src = data.schedule_image_url;
-                document.getElementById('schedule-image').alt = data.schedule_title;
-                document.getElementById('background-container').style.backgroundImage = `url(${data.background_image_url})`;
+                // Load images using Base64 method
+                const logoId = data.logo_url.split('id=')[1];
+                const scheduleId = data.schedule_image_url.split('id=')[1];
+                const backgroundId = data.background_image_url.split('id=')[1];
+
+                if (logoId) {
+                    const logoBase64 = await fetchImageAsBase64(logoId, 'image/png');
+                    if (logoBase64) {
+                        document.getElementById('logo-container').innerHTML = `<img src="${logoBase64}" alt="Logo ${data.title}" class="max-h-24 w-auto">`;
+                        document.getElementById('favicon').href = logoBase64;
+                    }
+                }
+
+                if (scheduleId) {
+                    const scheduleBase64 = await fetchImageAsBase64(scheduleId, 'image/png');
+                    if (scheduleBase64) {
+                        document.getElementById('schedule-image').src = scheduleBase64;
+                        document.getElementById('schedule-image').alt = data.schedule_title;
+                    }
+                }
+
+                if (backgroundId) {
+                    const backgroundBase64 = await fetchImageAsBase64(backgroundId, 'image/png');
+                    if (backgroundBase64) {
+                        document.getElementById('background-container').style.backgroundImage = `url("${backgroundBase64}")`;
+                    }
+                }
+
                 document.getElementById('main-content').style.backgroundColor = hexToRgba(data.card_background_color, data.card_background_alpha);
                 
+                // Tambahkan URL notulen ke tombol notulen
                 document.getElementById('button-2').href = data.notulen_url || '#';
+                
+                // Tambahkan URL kontak ke tombol kontak
                 document.getElementById('button-3').href = data.kontak_url || '#';
 
+
+                // Pemicu Animasi
                 document.getElementById('loading-container').classList.add('hidden');
                 const mainContent = document.getElementById('main-content');
                 mainContent.classList.remove('hidden');
                 
+                // Tambahkan kelas untuk memulai animasi secara berurutan
                 setTimeout(() => {
                     mainContent.classList.add('is-visible');
-                }, 100); 
+                }, 100); // Jeda singkat sebelum kartu muncul
+
                 setTimeout(() => {
                     document.getElementById('button-1').classList.add('is-visible');
-                }, 300); 
+                }, 300); // Tombol 1 muncul
+
                 setTimeout(() => {
                     document.getElementById('button-upload').classList.add('is-visible');
-                }, 450); 
+                }, 450); // Tombol upload muncul
+
                 setTimeout(() => {
                     document.getElementById('button-archive').classList.add('is-visible');
-                }, 600); 
+                }, 600); // Tombol arsip muncul
+
                 setTimeout(() => {
                     document.getElementById('button-2').classList.add('is-visible');
-                }, 750); 
+                }, 750); // Tombol notulen muncul
+                
                 setTimeout(() => {
                     document.getElementById('button-3').classList.add('is-visible');
-                }, 900); 
+                }, 900); // Tombol kontak muncul
+
 
             } catch (error) {
                 console.error('Error fetching data:', error);
